@@ -10,7 +10,7 @@ const Summary = () => {
                     type="checkbox"
                     checked={checked}
                     id="confirm-checkbox"
-                    onClick={(e) => {
+                    onChange={(e) => {
                         setChecked(e.target.checked); //이벤트가 발생했을 때 해당 요소의 `checked`속성이 뭔지 확인하겠다는 뜻
                     }}
                 />{' '}
