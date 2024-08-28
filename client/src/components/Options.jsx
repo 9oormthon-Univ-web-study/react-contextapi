@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Options = () => {
+const Options = ({ name, imagePath }) => {
     return <div>Options</div>;
 };
 

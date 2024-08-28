@@ -4,9 +4,9 @@ import Type from '../../components/Type';
 const Order = () => {
     return (
         <div>
-            <h1>Travel Producs</h1>
+            <h1>Travel Products</h1>
             <div>
-                <Type orderType="produtcs"></Type>
+                <Type orderType="products"></Type>
             </div>
             <div style={{ display: 'flex', marginTop: '20' }}>
                 <div style={{ width: '50%' }}>
