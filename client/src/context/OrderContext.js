@@ -6,8 +6,8 @@ const OrderContext = createContext();
 OrderContextProvider라는 함수를 만들고 index.js에서 호출할 수 있도록 함 */
 export function OrderContextProvider(props) {
     const [orderCounts, setOrderCounts] = useState({
-        //주문한 애들을 모아두는 객체, 리스트로 담기 위해서 Map으로 선언해둠
-        products: new Map(),
+        //주문한 애들을 모아두는 객체, key, value쌍의 리스트로 담기 위해서 Map으로 선언해둠
+        products: new Map(), // 제품명과 개수의 쌍으로 저장
         options: new Map(),
     });
 
@@ -17,7 +17,7 @@ export function OrderContextProvider(props) {
             const newOrderCounts = { ...orderCounts }; //현재 주문 내역들을 받아서 newOrderCounts로(불변성 유지)
 
             const orderCountsMap = orderCounts[orderType]; //products인지, options인지
-            orderCountsMap.set(itemName, parseInt(newOrderCounts)); //둘 중 하나의 Map에 상품 이름과 몇개 등록됐는지 저장
+            orderCountsMap.set(itemName, parseInt(newItemCount)); //둘 중 하나의 Map에 상품 이름과 몇개 등록됐는지 저장
 
             setOrderCounts(newOrderCounts);
         };
