@@ -4,7 +4,7 @@ const Summary = () => {
     const [checked, setChecked] = useState(false);
 
     return (
-        <div>
+        <div style={{ backgroundColor: 'red' }}>
             <form>
                 <input
                     type="checkbox"

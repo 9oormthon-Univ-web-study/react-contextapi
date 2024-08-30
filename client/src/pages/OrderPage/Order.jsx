@@ -3,7 +3,7 @@ import Type from '../../components/Type';
 
 const Order = () => {
     return (
-        <div>
+        <div style={{ backgroundColor: 'green' }}>
             <h1>Travel Products</h1>
             <div>
                 <Type orderType="products"></Type>
