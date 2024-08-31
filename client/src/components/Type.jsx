@@ -11,7 +11,6 @@ const Type = ({ orderType }) => {
     const [orderData, updateItemCount] = useContext(OrderContext); // 배열을 반환하기 때문에 분해하여 할당할 땐 순서를 기준으로 원하는 이름으로 재할당 가능
     //orderData에는 itemName, newItemCount, orderType
     //updateItemCount에는 orderData로 값을 업데이트해주는 함수
-    console.log(orderData, updateItemCount);
 
     useEffect(() => {
         loadItems(orderType);

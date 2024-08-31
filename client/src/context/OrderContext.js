@@ -1,5 +1,6 @@
 import { createContext, useState, useMemo, useEffect } from 'react';
 
+//context 객체 안에는 Provider라는 컴포넌트가 내장되어있음.
 export const OrderContext = createContext();
 
 /* index.js에서 전역으로 처리할 값들을 선언하고 연산하는 과정이 많아지면 가독성이 떨어지기 때문에
@@ -42,6 +43,7 @@ export function OrderContextProvider(props) {
         });
     }, [orderCounts]);
 
+    //map 최신화 함수
     //value는 orderCounts를 return해주는 함수이고 이 함수는 orderCounts값이 바뀌지 않으면 저장된 값으로만 가져옴
     const value = useMemo(() => {
         /**
