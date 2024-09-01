@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const store = createStore(rootReducer);
 
 store.dispatch({
-    type: 'ADD_DOTO',
+    type: 'ADD_TODO',
     text: 'USE_REDUX',
 });
 
