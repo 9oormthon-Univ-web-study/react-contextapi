@@ -1,4 +1,28 @@
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import { createAction, createReducer, createSlice } from '@reduxjs/toolkit';
+
+const initialState = { value: 0 };
+
+//action과 reducer를 한번에 설정할 수 있으며 action, reducer를 별도로 관리할 수 있다는 장점을 가진 createSlice()
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState,
+    reducers: {
+        increment(state) {
+            state.value++;
+        },
+        decrement(state) {
+            state.value--;
+        },
+        incrementAmount(state, action) {
+            state.value += action.payload;
+        },
+    },
+});
+
+export const { increment, decrement, incrementAmount } = counterSlice.actions;
+export default counterSlice.reducer;
+
+/*
 
 interface CounterState {
     value: number;
@@ -33,3 +57,6 @@ const action2 = incrementByAmount(5); // { type: 'counter/incrementByAmount', pa
 
 console.log(counterReducer(initialState, action1)); // { value: 1 }
 console.log(counterReducer({ value: 5 }, action2)); // { value: 10 }
+
+
+*/
