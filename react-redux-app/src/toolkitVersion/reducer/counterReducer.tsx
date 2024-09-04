@@ -1,6 +1,18 @@
-import { createAction, createReducer, createSlice } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk, createReducer, createSlice } from '@reduxjs/toolkit';
 
-const initialState = { value: 0 };
+interface CounterState {
+    value: number;
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+}
+
+const initialState: CounterState = { value: 0, status: 'idle', error: null };
+
+//비동기 액션 생성
+export const incrementAsync = createAsyncThunk('counter/incrementAsync', async (amount: number) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000)); //1초 지연 후 amount 반환
+    return amount;
+});
 
 //action과 reducer를 한번에 설정할 수 있으며 action, reducer를 별도로 관리할 수 있다는 장점을 가진 createSlice()
 const counterSlice = createSlice({
@@ -16,6 +28,20 @@ const counterSlice = createSlice({
         incrementAmount(state, action) {
             state.value += action.payload;
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(incrementAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(incrementAsync.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.value += action.payload;
+            })
+            .addCase(incrementAsync.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || null;
+            });
     },
 });
 
