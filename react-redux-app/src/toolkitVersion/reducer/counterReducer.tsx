@@ -1,4 +1,5 @@
-import { createAction, createAsyncThunk, createReducer, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 interface CounterState {
     value: number;
@@ -16,7 +17,13 @@ export const incrementAsync = createAsyncThunk(
         return amount;
     }
 );
-//pending :
+
+//실제 호출 요청 추가(현재로는 Async 요청을 중간에 중단해서 rejected 상태가 되어도 요청 값은 오고있는 상태)
+//rejected 상태가 되면 request요청도 취소가 되도록 추가 예정
+export const fetchUsersAsync = createAsyncThunk('counter/fetchUsers', async () => {
+    const users = await axios.get('https://jsonplaceholder.typicode.com/users');
+    console.log(users);
+});
 
 //action과 reducer를 한번에 설정할 수 있으며 action, reducer를 별도로 관리할 수 있다는 장점을 가진 createSlice()
 const counterSlice = createSlice({
