@@ -9,10 +9,14 @@ interface CounterState {
 const initialState: CounterState = { value: 0, status: 'idle', error: null };
 
 //비동기 액션 생성
-export const incrementAsync = createAsyncThunk('counter/incrementAsync', async (amount: number) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000)); //1초 지연 후 amount 반환
-    return amount;
-});
+export const incrementAsync = createAsyncThunk(
+    'counter/incrementAsync', //액션 타입에 따라 pending, fulfilled, rejected가 붙은 액션 타입이 생성됨
+    async (amount: number) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000)); //1초 지연 후 amount 반환
+        return amount;
+    }
+);
+//pending :
 
 //action과 reducer를 한번에 설정할 수 있으며 action, reducer를 별도로 관리할 수 있다는 장점을 가진 createSlice()
 const counterSlice = createSlice({
@@ -31,13 +35,16 @@ const counterSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            //'counter/incrementAsync/pending'액션을 디스패치하는 액션 생성
             .addCase(incrementAsync.pending, (state) => {
                 state.status = 'loading';
             })
+            //'counter/incrementAsync/fulfilled'액션을 디스패치하는 액션 생성
             .addCase(incrementAsync.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.value += action.payload;
             })
+            //'counter/incrementAsync/rejected'액션을 디스패치하는 액션 생성
             .addCase(incrementAsync.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || null;
