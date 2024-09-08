@@ -20,10 +20,11 @@ export const incrementAsync = createAsyncThunk(
 
 //실제 호출 요청 추가(현재로는 Async 요청을 중간에 중단해서 rejected 상태가 되면 request 요청도 함께 취소되도록 추가)
 //rejected 상태가 되면 request요청도 취소가 되도록 추가 함
-export const fetchUsersAsync = createAsyncThunk('counter/fetchUsers', async (_, thunkAPI) => {
+//async함수의 첫번째 매개변수는 fetchUserAsync를 호출할 때 전달하는 인수
+export const fetchUsersAsync = createAsyncThunk('counter/fetchUsers', async (_, { signal }) => {
     const controller = new AbortController();
     //여기서 사용한 signal 객체는 앱 로직의 다른 부분에서 이 요청을 취소했는지 확인할 수 있는 객체(eventListener 메서드가 포함되어 있음)
-    thunkAPI.signal.addEventListener('abort', () => {
+    signal.addEventListener('abort', () => {
         controller.abort();
     });
     const users = await axios.get('https://jsonplaceholder.typicode.com/users', { signal: controller.signal });

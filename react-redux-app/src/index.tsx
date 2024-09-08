@@ -12,12 +12,10 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 const render = () =>
     root.render(
-        <React.StrictMode>
-            <Provider store={store}>
-                {/* Provider를 사용하면 하위 컴포넌트에서 props drilling 없이 useSelector나 useDispatch로 상태와 액션을 가져올 수 있음 */}
-                <App />
-            </Provider>
-        </React.StrictMode>
+        <Provider store={store}>
+            {/* Provider를 사용하면 하위 컴포넌트에서 props drilling 없이 useSelector나 useDispatch로 상태와 액션을 가져올 수 있음 */}
+            <App />
+        </Provider>
     );
 
 render();
