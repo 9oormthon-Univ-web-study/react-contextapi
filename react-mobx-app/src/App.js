@@ -1,7 +1,7 @@
 import './App.css';
 
-function App() {
-    return <div className="App"></div>;
+function App({ myCounter }) {
+    return <div className="App">{myCounter.count}</div>;
 }
 
 export default App;
