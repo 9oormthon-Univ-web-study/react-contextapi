@@ -5,8 +5,9 @@ export default class counterStore {
     count = 0;
 
     constructor() {
+        //추천되는 방식, 원래는 ES.next데코레이터를 활용했었으나 이제는 권장되지 않음
         makeObservable(this, {
-            // 각각의 역할을 객체의 value 부분에 부여를 해주는데 이 것을 주석을 단다고 표현함
+            //각각의 역할을 객체의 value 부분에 부여를 해주는데 이 것을 주석을 단다고 표현함
             //observable은 관찰될 수 있는 값을 의미함 즉 mobX가 변경을 감지함
             count: observable,
             //computed는 다른 observable 상태를 기반으로 계산되는 값을 캐시하고 최적화(반환값이 캐싱됨)
