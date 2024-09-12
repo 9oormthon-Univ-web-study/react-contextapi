@@ -1,46 +1,60 @@
-# Getting Started with Create React App
+![alt text](image.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# action과 reducer는 모두 createSlice()를 통해 생성
 
-## Available Scripts
+1. action과 reducer를 동시에 설정할 수 있음
+2. aciton과 reducer를 별도로 관리할 수 있음
 
-In the project directory, you can run:
+두 가지의 장점을 가지고 있는 방식
 
-### `npm start`
+# + 버튼
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+해당 버튼에 onClick 이벤트 발생 시 `counter/increment()`라는 이름의 액션이 dispatch 됨
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# - 버튼
 
-### `npm test`
+해당 버튼에 onClick 이벤트 발생 시 `counter/decrement()`라는 이름의 액션이 dispatch 됨
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# +5 버튼
 
-### `npm run build`
+해당 버튼에 onClick 이벤트 발생 시 `counter/incrementAmount()`라는 이름의 액션이 dispatch 됨,
+`dispatch(incrementAmount(5))`의 형식으로 호출하는데 인자로 들어가는 숫자는 `action.payload`에 들어가게 됨
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+내부적으로는
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```{
+    type : 'counter/increment',
+    payload : 5
+    }
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+액션을 생성할 때 들어가는 인자인 state에는 자동으로 현재의 상태가 들어가고 payload에는 `action.payload`가 들어감
 
-### `npm run eject`
+# extraReducers
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`createSlice()`는 외부의 action을 가져와서 사용할 수 있는 `extraReducers()`라는 메서드를 사용할 수 있음 => 어디서 사용되는 지는 뒤에서..
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# createAction의 비동기 버전인 createAsyncThunk()
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`createAsyncThunk()`는 action을 만들어주는 함수기 때문에 `createSlice()`를 사용한다면 `extraReducers()`와 함께 사용해야 함
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Mount Test Component 버튼
 
-## Learn More
+해당 버튼에 onClick 이벤트 발생 시 `createAsyncThunk()`로 만든 `fetchUsersAsync()`액션이 dispatch됨 해당 로직에서는 상태변화가 필요 없기 때문에 굳이 reducers는 구현하지 않았음
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# fetchUsersAsync()
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+단순한 action객체가 아니라 비동기 작업을 시작하고 그 결과에 따라 적잘한 액션(pending, fulfilled, rejected)을 디스패치 하는 함수, 반환값으로는
+
+1. Pending: 비동기 작업이 아직 완료되지 않았을 때
+2. Fulfilled: 비동기 작업이 성공적으로 완료되었을 때
+3. Rejected: 비동기 작업이 실패했을 때
+   의 Promise를 가짐
+
+# abort()
+
+Redux Toolkit은 위의 Promise 객체에 abort 메서드를 추가함, 해당 메서드가 호출되면 진행 중인 비동기 작업을 취소할 수 있게 됨
+
+![alt text](image-1.png)
+
+비동기 작업(`setTimeout()`)이 끝나기 전에 버튼을 한번 더 누르면 `abort()`가 호출되도록 구현

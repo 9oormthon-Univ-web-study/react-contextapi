@@ -33,7 +33,7 @@ export const fetchUsersAsync = createAsyncThunk('counter/fetchUsers', async (_, 
 
 //action과 reducer를 한번에 설정할 수 있으며 action, reducer를 별도로 관리할 수 있다는 장점을 가진 createSlice()
 const counterSlice = createSlice({
-    name: 'counter',
+    name: 'counter', //각 action들의 type에 prefix될 이름`
     initialState,
     reducers: {
         increment(state) {
