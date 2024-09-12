@@ -19,10 +19,14 @@ export default class counterStore {
     }
 
     //isNegative는 computed임, 따라서 count값을 관찰하고 계산된 결과를 반환함
+    //프로퍼티처럼 접근하여 사용할 수 있는 방식
+    //읽기 전용 특성이라 getter로 취급됨
     get isNegative() {
         return this.count > 0 ? 'YES' : 'NO';
     }
 
+    //decrease()와 함께 javascript 메서드로 분류됨
+    //상태를 변경하는 것이기 때문에 명시적인 호출이 필요해서 프로퍼티처럼 접근하지 않는 것이 좋음(메서드로 분류된 이유)
     increase() {
         this.count += 1;
     }

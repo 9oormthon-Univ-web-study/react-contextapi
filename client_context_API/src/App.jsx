@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Summary from './pages/SummaryPage/Summary';
 import Order from './pages/OrderPage/Order';
