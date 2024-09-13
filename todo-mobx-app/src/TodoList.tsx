@@ -21,7 +21,7 @@ const TodoList: React.FC<TodoListProps> = observer(({ todoStore }) => {
             <button
                 onClick={() => {
                     if (value) {
-                        todoStore.addTodo(value);
+                        todoStore.addTodo(value); //addTodo메서드가 호출될 때마다 전역으로 공유하는 id변수의 값이 1씩 증가하며 부여됨
                     }
                     setValue('');
                 }}

@@ -17,17 +17,19 @@ export default class TodoStore {
         });
     }
 
+    //nextId라는 변수를 인스턴스 변수로 선언해 객체가 생성될 때 초기화되고 각 객체의 고유한 상태가 됨
+    private nextId = 0;
     addTodo(title: string) {
-        const item: TodoItem = {
-            id: getId(),
+        const item = {
+            id: this.nextId++,
             title,
             completed: false,
         };
         this.todos.push(item);
+        return item;
     }
 
     // observable인 todos를 하나씩 순회하면서 completed인지 remaining인지 체크하며 반환
-    removeTodo() {}
     get status() {
         let completed = 0,
             remaining = 0;
