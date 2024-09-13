@@ -16,6 +16,7 @@ export default class TodoStore {
             status: computed,
         });
     }
+
     addTodo(title: string) {
         const item: TodoItem = {
             id: getId(),
@@ -24,6 +25,8 @@ export default class TodoStore {
         };
         this.todos.push(item);
     }
+
+    // observable인 todos를 하나씩 순회하면서 completed인지 remaining인지 체크하며 반환
     removeTodo() {}
     get status() {
         let completed = 0,
@@ -38,6 +41,12 @@ export default class TodoStore {
         return { completed, remaining };
     }
 
+    // findIndex에서 값이 없으면 -1을 내보내주기 때문에 조건문에 들어가려면 리스트에 있는 id값이어야 함
+    // 해당 id를 가진 값의 completed를 반전시켜줌
+    /**
+     *
+     * @param id todo 리스트에서 선택한 항목의 id 값
+     */
     toggleTodo(id: number) {
         const index = this.todos.findIndex((item) => item.id === id);
         if (index > -1) {
