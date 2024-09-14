@@ -1,18 +1,18 @@
 import './App.css';
-import { atom, useRecoilState } from 'recoil';
+import { atom } from 'recoil';
+import TextInput from './TextInput';
 
-interface TextState {
-    text: string;
-}
-
-const textState = atom<TextState>({
+export const textState = atom({
     key: 'textState',
-    default: { text: '' },
+    default: '',
 });
 
 function App() {
-    const [text, setText] = useRecoilState(textState);
-    return <div className="App"></div>;
+    return (
+        <div className="App">
+            <TextInput />
+        </div>
+    );
 }
 
 export default App;
