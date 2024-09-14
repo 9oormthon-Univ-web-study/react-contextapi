@@ -3,6 +3,7 @@ import { atom, selector, RecoilState, RecoilValueReadOnly } from 'recoil';
 import TextInput from './TextInput';
 import './App.css';
 import Character from './Character';
+import useToInputOrTodo from './useToInputOrTodo';
 
 // 텍스트 상태의 타입 정의
 type TextState = string;
@@ -26,10 +27,13 @@ export const charCounterState: RecoilValueReadOnly<number> = selector({
 
 // React 컴포넌트의 타입 명시
 const App: React.FC = () => {
+    const goToTodo = useToInputOrTodo(); // 커스텀 훅 사용
+
     return (
         <div className="App">
             <TextInput />
             <Character />
+            <button onClick={goToTodo}>Toggle Input/Todo</button>
         </div>
     );
 };
