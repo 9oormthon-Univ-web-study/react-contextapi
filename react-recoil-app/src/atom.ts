@@ -2,7 +2,13 @@ import { atom, RecoilState, RecoilValueReadOnly, selector } from 'recoil';
 
 // 텍스트 상태의 타입 정의
 type TextState = string;
-type TodoState = string[];
+type TodoState = todoItem[];
+
+interface todoItem {
+    id: number;
+    text: string;
+    isCompleted: boolean;
+}
 
 // atom의 타입 명시
 export const textState: RecoilState<TextState> = atom<TextState>({
@@ -27,3 +33,8 @@ export const todoList: RecoilState<TodoState> = atom<TodoState>({
     key: 'todoList',
     default: [],
 });
+
+let id: number = 0;
+export const getId = () => {
+    return id++;
+};
