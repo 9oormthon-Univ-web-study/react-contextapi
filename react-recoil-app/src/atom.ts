@@ -2,9 +2,9 @@ import { atom, RecoilState, RecoilValueReadOnly, selector } from 'recoil';
 
 // 텍스트 상태의 타입 정의
 type TextState = string;
-type TodoState = todoItem[];
+export type TodoState = todoItem[];
 
-interface todoItem {
+export interface todoItem {
     id: number;
     text: string;
     isCompleted: boolean;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import useToInputOrTodo from './useToInputOrTodo';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { getId, todoList } from './atom';
+import { getId, todoList, todoItem } from './atom';
+import TodoItem from './TodoItem';
 
 const Todo: React.FC = () => {
     const goToInput = useToInputOrTodo();
@@ -12,7 +13,6 @@ const Todo: React.FC = () => {
     };
     // useRecoilValue()로 atom에서 상태 불러옴
     const todoLists = useRecoilValue(todoList);
-    console.log({ todoLists }); // 콘솔로 확인
     // setState함수의 콜백 인자로 현재 상태가 들어오는 것을 활용해서 새로운 객체를 추가해서 배열에 추가
     const addItem = () => {
         setTodoList((oldTodoList) => [
@@ -29,6 +29,11 @@ const Todo: React.FC = () => {
         <div>
             <div>이곳은 Todo</div>
             <input type="text" value={value} onChange={handleInput} />
+            <div>
+                {todoLists.map((todoItem: todoItem) => (
+                    <TodoItem item={todoItem} />
+                ))}
+            </div>
             <button onClick={addItem}>Add todo</button>
             <button onClick={goToInput}>Go To Input</button>
         </div>
