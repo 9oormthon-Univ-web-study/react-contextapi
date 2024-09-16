@@ -27,7 +27,7 @@ export const charCounterState: RecoilValueReadOnly<number> = selector({
 });
 // set말고 상태를 변경하는 `useSetRecoilState()`라는 함수도 존재하는데 이는 간단한 상황에서 변경, `set`은 복잡한 로직을 캡슐화
 
-//RecoilState의 타입 : todoList키에 대한 타입
+//RecoilState의 타입 : todoList키의 값에 대한 타입
 //atom의 타입 : default값에 대한 타입
 export const todoList: RecoilState<TodoState> = atom<TodoState>({
     key: 'todoList',

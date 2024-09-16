@@ -10,8 +10,10 @@ const Todo: React.FC = () => {
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
     };
+    // useRecoilValue()로 atom에서 상태 불러옴
     const todoLists = useRecoilValue(todoList);
-    console.log({ todoLists });
+    console.log({ todoLists }); // 콘솔로 확인
+    // setState함수의 콜백 인자로 현재 상태가 들어오는 것을 활용해서 새로운 객체를 추가해서 배열에 추가
     const addItem = () => {
         setTodoList((oldTodoList) => [
             ...oldTodoList,
@@ -21,7 +23,7 @@ const Todo: React.FC = () => {
                 isCompleted: false,
             },
         ]);
-        setValue('');
+        setValue(''); // 값을 리스트에 추가하면 입력칸 다시 초기화
     };
     return (
         <div>
