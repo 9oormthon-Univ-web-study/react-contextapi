@@ -1,7 +1,5 @@
 import { atom, RecoilState, RecoilValueReadOnly, selector } from 'recoil';
 
-// 텍스트 상태의 타입 정의
-type TextState = string;
 export type TodoState = todoItem[];
 
 export interface todoItem {
@@ -14,7 +12,7 @@ export interface todoItem {
 export type FilterState = 'Show All' | 'Show Completed' | 'Show Uncompleted';
 
 // atom의 타입 명시
-export const textState: RecoilState<TextState> = atom<TextState>({
+export const textState: RecoilState<string> = atom<string>({
     key: 'textState',
     default: '',
 });
@@ -32,7 +30,7 @@ export const charCounterState: RecoilValueReadOnly<number> = selector({
 
 //RecoilState의 타입 : todoList키의 값에 대한 타입
 //atom의 타입 : default값에 대한 타입
-export const todoList: RecoilState<TodoState> = atom<TodoState>({
+export const todoListState: RecoilState<TodoState> = atom<TodoState>({
     key: 'todoList',
     default: [],
 });
@@ -47,7 +45,7 @@ export const filteredTodoListState: RecoilValueReadOnly<TodoState> = selector<To
     key: 'filteredTodoListState',
     get: ({ get }) => {
         const filter = get(todoListFilterState);
-        const list = get(todoList);
+        const list = get(todoListState);
 
         switch (filter) {
             case 'Show Completed':
