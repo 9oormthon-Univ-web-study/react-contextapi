@@ -8,6 +8,13 @@ export interface todoItem {
     isCompleted: boolean;
 }
 
+interface TodoListStats {
+    totalNum: number;
+    totalCompletedNum: number;
+    totalUncompletedNum: number;
+    percentCompleted: number;
+}
+
 // 필터 타입 정의
 export type FilterState = 'Show All' | 'Show Completed' | 'Show Uncompleted';
 
@@ -55,6 +62,20 @@ export const filteredTodoListState: RecoilValueReadOnly<TodoState> = selector<To
             default:
                 return list;
         }
+    },
+});
+
+// 통계 관련 selector
+export const todoListStatsState = selector<TodoListStats>({
+    key: 'todoListStatsState',
+    get: ({ get }) => {
+        const todoList = get(todoListState);
+        const totalNum = todoList.length;
+        const totalCompletedNum = todoList.filter((item) => item.isCompleted).length;
+        const totalUncompletedNum = totalNum - totalCompletedNum;
+        const percentCompleted = totalNum === 0 ? 0 : totalCompletedNum / totalNum;
+
+        return { totalNum, totalCompletedNum, totalUncompletedNum, percentCompleted };
     },
 });
 

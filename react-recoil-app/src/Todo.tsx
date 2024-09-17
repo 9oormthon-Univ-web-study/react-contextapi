@@ -4,6 +4,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { getId, todoListState, todoItem, filteredTodoListState } from './atom';
 import TodoItem from './TodoItem';
 import TodoListFilters from './TodoListFilters';
+import TodoListStats from './TodoListStats';
 
 const Todo: React.FC = () => {
     const goToInput = useToInputOrTodo();
@@ -33,6 +34,7 @@ const Todo: React.FC = () => {
     return (
         <div>
             <div>이곳은 Todo</div>
+            <TodoListStats />
             <input type="text" value={value} onChange={handleInput} />
             <TodoListFilters />
             <div>
