@@ -10,6 +10,9 @@ export interface todoItem {
     isCompleted: boolean;
 }
 
+// 필터 타입 정의
+export type FilterState = 'Show All' | 'Show Completed' | 'Show Uncompleted';
+
 // atom의 타입 명시
 export const textState: RecoilState<TextState> = atom<TextState>({
     key: 'textState',
@@ -34,7 +37,28 @@ export const todoList: RecoilState<TodoState> = atom<TodoState>({
     default: [],
 });
 
+export const todoListFilterState: RecoilState<string> = atom<string>({
+    key: 'todoListFilterState',
+    default: 'Show All',
+});
+
+// 읽기 전용이기 때문에 RecoilState로 선언하면 안되고 RecoilValueReadOnly로 해줘야 함
+export const filteredTodoListState: RecoilValueReadOnly<TodoState> = selector<TodoState>({
+    key: 'filteredTodoListState',
+    get: ({ get }) => {
+        const filter = get(todoListFilterState);
+        const list = get(todoList);
+
+        switch (filter) {
+            case 'Show Completed':
+                return list.filter((item) => item.isCompleted);
+            case 'Show Uncompleted':
+                return list.filter((item) => !item.isCompleted);
+            default:
+                return list;
+        }
+    },
+});
+
 let id: number = 0;
-export const getId = () => {
-    return id++;
-};
+export const getId = () => id++;
