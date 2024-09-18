@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { atom, RecoilState, RecoilValueReadOnly, selector } from 'recoil';
 
 export type TodoState = todoItem[];
@@ -76,6 +77,21 @@ export const todoListStatsState = selector<TodoListStats>({
         const percentCompleted = totalNum === 0 ? 0 : totalCompletedNum / totalNum;
 
         return { totalNum, totalCompletedNum, totalUncompletedNum, percentCompleted };
+    },
+});
+
+// selector로 가져오는 데이터 값은 자동으로 캐싱됨!(같은 값을 호출하게 되면 같은 결과 반환)
+export const currentUserIdState = atom<string>({
+    key: 'currentUserIdState',
+    default: '1',
+});
+
+export const currentUserNameQuery = selector<any>({
+    key: 'currentUserNameQuery',
+    get: async ({ get }) => {
+        const path = `https://jsonplaceholder.typicode.com/users/`; //base url
+        const response = await axios.get(`${path}${get(currentUserIdState)}`);
+        return response.data.name;
     },
 });
 
