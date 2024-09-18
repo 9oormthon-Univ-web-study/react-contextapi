@@ -15,15 +15,8 @@ const App: React.FC = () => {
             <TextInput />
             <Character />
             <button onClick={goToTodo}>Toggle Input/Todo</button>
-            비동기 요청 확인
-            <CurrentUserInfo />
         </div>
     );
 };
 
 export default App;
-
-const CurrentUserInfo = () => {
-    const userName = useRecoilValue(currentUserNameQuery);
-    return <div>{userName}</div>;
-};

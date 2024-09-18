@@ -31,6 +31,7 @@ const Todo: React.FC = () => {
         ]);
         setValue(''); // 값을 리스트에 추가하면 입력칸 다시 초기화
     };
+
     return (
         <div>
             <div>이곳은 Todo</div>
