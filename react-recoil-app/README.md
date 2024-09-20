@@ -1,31 +1,53 @@
 # recoil을 활용한 todoList 앱
 
 ![alt text](image.png)
+
 연습용으로 구현한 글자수 세는 input과 분리하기 위해 라우터로 구분 -> Toggle Input/Todo 클릭하면 라우터 변경
 
 ## 구현한 기능
 
 -   add Todo
+-   
     ![alt text](image-1.png)
+    
     input에 할 일 내용을 입력한 후 'Add todo' 버튼을 클릭하면 리스트에 추가
+    
 -   리스트 수정
+-   
     ![alt text](image-2.png)
+    
     input 박스에서 직접 수정할 수 있음
+    
 -   todo 항목 토글
+-   
     ![alt text](image-3.png)
+    
     체크박스 토글을 하면 Completed의 상태가 true로 바뀜
+    
 -   리스트 삭제
+-   
     ![alt text](image-4.png)
+    
     X 버튼을 누르면 배열에서 삭제
+    
 -   필터링 기능(전체, 끝낸 항목들만, 남은 항목들만)
+-   
     ![alt text](image-5.png)
+    
     필터의 상태가 All 일 땐 전체
+    
     ![alt text](image-6.png)
+    
     Completed일 땐 완료한 항목들
+    
     ![alt text](image-7.png)
+    
     Uncompleted일 땐 미완성 항목들만
+    
 -   통계
+-   
     ![alt text](image-8.png)
+    
     상태들을 통계로 보여줌
 
 # 사용한 Recoil의 훅
